@@ -41,6 +41,8 @@ jspm_packages
 
 # Twilio credentials file
 .env
+.env.template
+README.md
 
 # Misc
 .DS_Store
