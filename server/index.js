@@ -44,7 +44,7 @@ const app = express();
 });
 
 // Set up the path for the quickstart.
-const quickstartPath = path.join(__dirname, '../quickstart/public');
+const quickstartPath = path.join(__dirname, '../quickstart/public/index.html');
 app.use('/quickstart', express.static(quickstartPath));
 
 // Set up the path for the examples page.
