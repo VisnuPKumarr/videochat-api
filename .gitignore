@@ -49,7 +49,7 @@ README.md
 package-lock.json
 
 # The generated index.js
-**/public/index.js
+#**/public/index.js
 
 # The generated helpers.js
 **/public/helpers.js
