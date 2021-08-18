@@ -32881,6 +32881,9 @@ async function joinRoom(token, connectOptions) {
       participant.videoTracks.forEach(each => {
         localStorage.setItem('participantvideo', each.trackSid)
       })
+      participant.audioTracks.forEach(each => {
+        localStorage.setItem('participantaudio', each.trackSid)
+      })
     });
   
     // Set the current active Participant.
@@ -32912,6 +32915,9 @@ async function joinRoom(token, connectOptions) {
   // Subscribe to the media published by RemoteParticipants joining the Room later.
   room.on('participantConnected', participant => {
     participantConnected(participant, room);
+    participant.audioTracks.forEach(each => {
+      localStorage.setItem('participantaudio', each.trackSid)
+    })
   });
 
   // Handle a disconnected RemoteParticipant.
@@ -32936,6 +32942,13 @@ async function joinRoom(token, connectOptions) {
     room.disconnect();
   });
   }
+  
+  room.localParticipant.audioTracks.forEach(track => {
+    console.log('===========2====', track.trackSid, localStorage.getItem('participantaudio'))
+    if(track.trackSid != localStorage.getItem('participantaudio')){
+      track.track.stop();
+    }
+  })
   return new Promise((resolve, reject) => {
     // Leave the Room when the "beforeunload" event is fired.
     window.onbeforeunload = () => {
